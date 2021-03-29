@@ -1,0 +1,51 @@
+﻿from django.contrib.auth.models import User
+from news.models import Category
+from news.models import Author
+from news.models import Post
+from news.models import PostCategory
+from news.models import Comment
+
+first = User.objects.create(username='first', password='1111')
+second = User.objects.create(username='second', password='1111')
+
+author1 = Author.objects.create(user=first)
+author2 = Author.objects.create(user=second)
+
+cat1 = Category.objects.create(name='булшит')
+cat2 = Category.objects.create(name='it')
+cat3 = Category.objects.create(name='вышивка')
+cat4 = Category.objects.create(name='вязание')
+
+p1 = Post.objects.create(type = Post.news, title = 'why?', author = author1)
+
+PostCategory.objects.create(post = p1, category = cat1)
+PostCategory.objects.create(post = p1, category = cat2)
+
+p2 = Post.objects.create(type = Post.article, title = 'nope', author = author1)
+PostCategory.objects.create(post = p2, category = cat3)
+p3 = Post.objects.create(type = Post.article, title = 'yep', author = author2)
+PostCategory.objects.create(post = p3, category = cat1)
+
+c1 = Comment.objects.create(post=p1, user = first)
+c2 = Comment.objects.create(post=p2, user = first)
+c3 = Comment.objects.create(post=p3, user = second)
+c4 = Comment.objects.create(post=p1, user = first)
+
+c1.like()
+c1.like()
+c2.dislike()
+p1.like()
+p1.like()
+p2.dislike()
+p3.like()
+
+author1.updateRating()
+author2.updateRating()
+
+best_author=Author.objects.all().order_by("-rating").values("user__username","rating")[0]
+best_author
+
+best_post=Post.objects.all().order_by("-rating")[0]
+print(best_post.repr())
+
+for _ in comments: print(_.repr())
