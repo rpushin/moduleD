@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\NewsPaper",
+    "\\NewsPaper\\news",
+    "\\NewsPaper\\NewsPaper",
+    "\\NewsPaper\\prods",
+    "\\NewsPaper\\prods\\templates"
   ],
+  "SelectedNode": "\\NewsPaper\\news\\models.py",
   "PreviewInSolutionExplorer": false
 }
